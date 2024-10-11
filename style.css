@@ -2,7 +2,7 @@
 header {
     background-color: #003366;
     color: #fff;
-    padding: 10px 0;
+    padding: 20px 0;
 }
 
 .navbar {
@@ -48,6 +48,10 @@ header {
     position: relative;
 }
 
+.navbar .account {
+    position: relative;
+}
+
 .navbar .dropdown li {
     margin: 5px 0;
 }
@@ -60,7 +64,8 @@ header {
     transition: background-color 0.3s ease;
 }
 
-.navbar .shop:hover .dropdown {
+.navbar .shop:hover .dropdown,
+.navbar .account:hover .dropdown {
     display: block;
 }
 
@@ -69,9 +74,7 @@ header {
     border-radius: 5px;
 }
 
-/* General Styles */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -84,23 +87,59 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* Product List Styles */
-.product-list {
-    display: grid;
-    gap: 20px;
+.flex-container {
+    display: flex;
+    justify-content: space-evenly;
     padding: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    justify-items: center;
 }
 
-/* Product Card */
-.product {
+.categories {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-list {
+    flex: 2;
+    counter-reset: product-counter;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.product-list .product {
+    counter-increment: product-counter;
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 250px;
+    position: relative;
+}
+
+.product-list ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.product-list .product {
+    counter-increment: product-counter;
     background-color: white;
     padding: 15px;
     text-align: center;
     border: 1px solid #ddd;
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
+    position: relative;
+}
+
+.product-list .product::before {
+    content: counter(product-counter) ". ";
+    font-weight: bold;
 }
 
 .product img {
@@ -114,7 +153,6 @@ h1 {
     opacity: 1;
 }
 
-/* Product Text Styles */
 .product > * {
     color: #003366;
 }
@@ -130,13 +168,14 @@ h1 {
     color: #ffcc00;
 }
 
-/* Button Styling */
 .product > h3 ~ button {
     background-color: #e6f0ff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 }
 
 .product button::before {
@@ -147,6 +186,7 @@ h1 {
 .product > h3 ~ button:hover {
     background-color: #4b0082;
     color: white;
+    opacity: 1;
 }
 
 .product > h3 ~ button:active {
@@ -154,15 +194,22 @@ h1 {
     transform: scale(0.98);
 }
 
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #003366;
-    color: white;
+.product[data-sale="true"] {
+    border: 2px solid #ffcc00;
 }
 
-/* Checkout Section */
+.product[data-sale="true"]::after {
+    content: "On Sale!";
+    color: white;
+    background-color: #ffcc00;
+    padding: 5px;
+    border-radius: 3px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+}
+
 .checkout {
     margin: 20px;
     padding: 20px;
@@ -182,15 +229,9 @@ footer {
 
 .checkout input {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-.checkout input:focus {
-    border-color: #003366;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5);
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 .checkout button {
@@ -200,22 +241,19 @@ footer {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .checkout button:hover {
     background-color: #004080;
 }
 
-/* Media Queries for Responsive Layout */
-@media (max-width: 768px) {
-    .product-list {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .product-list {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 20px;
-    }
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
