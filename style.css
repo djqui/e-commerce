@@ -89,7 +89,7 @@ h1 {
     display: grid;
     gap: 20px;
     padding: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     justify-items: center;
 }
 
@@ -216,6 +216,6 @@ footer {
 @media (max-width: 480px) {
     .product-list {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 10px;
+        gap: 20px;
     }
 }
